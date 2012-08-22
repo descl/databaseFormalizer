@@ -1,0 +1,16 @@
+<p class="attrlistparam">
+  <%
+  if defined?(attrVal)
+    value = attrVal.value
+    suffix = rand(999999999999).to_s.center(13, rand(9).to_s)
+  else
+    value = ''
+    suffix = "new_#{parent.id}"
+  end
+  %>
+
+  <%= render("attr_val_" + parent.dataType + "_form", :parent => parent, :f => f, :suffix => suffix, :value => value) %>
+    
+  <%= f.hidden_field :_destroy %>
+  <%= link_to_function "remove", "remove_attrlistvalues(this)" %>
+</p>

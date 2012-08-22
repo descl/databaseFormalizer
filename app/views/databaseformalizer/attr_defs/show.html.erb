@@ -1,0 +1,50 @@
+<div id="metaModelPicture"></div>
+
+<p>
+  <b>Name:</b>
+  <%= @attr_def.attr_def_name %>
+</p>
+
+<p>
+  <b>Label:</b>
+  <%= @attr_def.label %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @attr_def.description %>
+</p>
+
+<p>
+  <b>Mandatory:</b>
+  <%= @attr_def.mandatory %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @attr_def.category %>
+</p>
+
+<p>
+  <b>Datatype:</b>
+  <%= @attr_def.dataType %>
+</p>
+<% if @attr_def.childEntityDef != nil %>
+<p>
+  <b>Child EntityDef: </b>
+  <%= link_to @attr_def.childEntityDef.label, @attr_def.childEntityDef %>
+</p>
+<%end%>
+<p>
+  <b>Attrdef childs</b>
+     <ol><% @attr_def.attrDefChilds.each do |attrDef| %><li><%= link_to attrDef.label, attrDef %></li><%end%></ol>
+</p>
+
+<p>
+  <b>Attrdef parents</b>
+    <ol><% @attr_def.attrDefParents.each do |attrDef| %><li><%= link_to attrDef.label, attrDef %></li><%end%></ol>
+</p>
+
+<%= link_to 'Edit', edit_databaseformalizer_attr_def_path(@attr_def) %> |
+<%= link_to 'Back', databaseformalizer_attr_defs_path %> |
+<%= link_to 'New', new_databaseformalizer_attr_def_path %>

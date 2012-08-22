@@ -1,0 +1,4 @@
+<% parent.attrDefs.each do |child| %>
+  <%= render("databaseformalizer/entities/attr_val_form_one", :parent => parent, :f => f, :attrDef => child, :entity => entity) %>
+<%end-%>
+

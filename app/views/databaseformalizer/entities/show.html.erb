@@ -1,0 +1,50 @@
+<div id="modelPicture"></div>
+
+<p>
+  <b>Label:</b>
+  <%= @entity.label %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @entity.description %>
+</p>
+
+<p>
+  <b>Entity def:</b>
+  <%=link_to @entity.entity_def.label, @entity.entity_def %>
+</p>
+<fieldset>
+  <legend>Attributs values for type <%= @entity.entity_def.label %></legend>
+  <ol>
+    <% @entity.attr_vals.each do |attrVal| %>
+    <% if attrVal.attrValParents.size == 0  %>
+      <li>
+        <%= link_to attrVal.attr_def_name + " ( " + attrVal.attrDef.dataType + " ) ", attrVal.attrDef %> : 
+        <% if attrVal.attrDef.dataType == "entityDef" && attrVal.value != nil && attrVal.value != ''%>
+                <%= link_to attrVal.value , Databaseformalizer::Entity.find(attrVal.value)%>
+              <%else%>
+                <%= attrVal.value %>
+              <%end%>
+        <ol>
+          <% attrVal.attrValChilds.each do |attrValChild| %>
+            <li>
+              <%= link_to attrValChild.attr_def_name + " ( " + attrValChild.attrDef.dataType + " ) ", attrValChild.attrDef %> : 
+              <% if attrValChild.attrDef.dataType == "entityDef" && attrVal.value != nil%>
+                <%= link_to attrValChild.value ,Databaseformalizer::Entity.find(attrValChild.value)%>
+              <%else%>
+                <%= attrValChild.value %>
+              <%end%>
+                
+            </li>
+          <%end%>
+        </ol>
+      </li>
+      <%end%>
+    
+    <%end%>
+  </ol>
+</fieldset>
+
+<%= link_to 'Edit', edit_databaseformalizer_entity_path(@entity) %> |
+<%= link_to 'Back', databaseformalizer_entities_path %>

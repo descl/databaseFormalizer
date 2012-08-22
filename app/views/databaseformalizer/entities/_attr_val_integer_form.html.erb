@@ -1,0 +1,10 @@
+<% suffix ||= "" %>
+<%=
+if defined? value
+  f.text_field parent.id+suffix, :value => value, :class => "required number"
+elsif entity.attr_vals.find_by_attr_def_name(parent.id) != nil
+  f.text_field parent.id+suffix, :value => entity.attr_vals.find_by_attr_def_name(parent.id).value, :class => "required number"
+else
+  f.text_field parent.id+suffix, :value => '0', :class => "required number"
+end
+%>

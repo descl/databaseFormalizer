@@ -1,0 +1,10 @@
+<% suffix ||= "" %>
+<%=
+if defined? value
+  f.text_area parent.id+suffix, :value => value, :size => "20x3"
+elsif entity.attr_vals.find_by_attr_def_name(parent.id) != nil
+  f.text_area parent.id+suffix, :value => entity.attr_vals.find_by_attr_def_name(parent.id).value, :size => "20x3"
+else
+  f.text_area parent.id+suffix, :size => "20x3"
+end
+%>

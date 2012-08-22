@@ -1,0 +1,7 @@
+<%=
+if entity.attr_vals.find_by_attr_def_name(parent.id) != nil
+  check_box_tag "attr_vals[#{parent.id}]",parent.id, :value => entity.attr_vals.find_by_attr_def_name(parent.id).value
+else
+  f.check_box parent.id
+end
+%>

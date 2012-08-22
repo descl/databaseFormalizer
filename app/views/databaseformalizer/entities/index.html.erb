@@ -1,0 +1,45 @@
+<div id="modelPicture"></div>
+<h1>Listing entities</h1>
+
+<table class="table table-striped table-bordered table-condensed table-sorter table-fixed-header" >
+  <thead class="header">
+    <tr>
+      <th>Label</th>
+      <th>Description</th>
+      <th>Entity def</th>
+      <th></th>
+    </tr>
+  </thead>
+
+<% @entities.each do |entity| %>
+  <tr>
+    <td><%= entity.label %></td>
+    <td><%= entity.description %></td>
+    <td><%= if entity.entity_def != nil; entity.entity_def.label end %></td>
+    <td class="td-button-menu">
+      <div class="btn-group">
+        <%= link_to 'Show', entity, :class => 'btn btn-info btn-mini' %>
+        <%= link_to 'Edit', edit_databaseformalizer_entity_path(entity), :class => 'btn btn-warning btn-mini' %>
+      </div>
+      <%= button_to 'Destroy', entity, :method=>:delete, :class=>'btn btn-danger btn-mini' %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Entity', new_databaseformalizer_entity_path, :class => 'btn btn-primary' %>
+<br/>
+<div class="page-header">
+  <h1>Model<small>, picture representing the model for your datas</small></h1>
+  <div class="page-header">
+      <ul class="thumbnails">
+        <li class="span10">
+          <a href="/images/UMLmodel.png" class="thumbnail">
+            <img src="/images/UMLmodel.png" alt="">
+          </a>
+        </li>
+      </ul>
+  </div>
+</div>

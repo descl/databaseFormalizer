@@ -1,0 +1,22 @@
+<ol>
+  <%= f.fields_for parent.attr_def_name do |builder| %>
+    <% parent.attrDefChilds.each do |child| %>
+      <li>
+        <label><%= child.label %> :</label>
+        <%=
+        case child.dataType
+          when "string"
+            builder.text_field child.attr_def_name
+          when "aChoice"
+            if entity.attr_vals.find_by_attr_def_name(child.attr_def_name) != nil
+              check = true
+            end
+            builder.check_box child.attr_def_name,  :checked => check#, child.id
+          else
+            'not yet implemented'
+        end
+        %>
+      </li>
+    <%end-%>
+  <%end-%>
+</ol>

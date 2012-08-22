@@ -1,0 +1,74 @@
+<%= form_for(@attr_def, :html => { :class => "form-horizontal"}) do |f| %>
+  <% if @attr_def.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attr_def.errors.count, "error") %> prohibited this attr_def from being saved:</h2>
+
+      <ul>
+      <% @attr_def.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :attr_def_name %><br />
+    <%= f.text_field :attr_def_name %>
+  </div>
+  <div class="field">
+    <%= f.label :label %><br />
+    <%= f.text_field :label %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :mandatory %><br />
+    <%= f.check_box :mandatory %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.text_field :category %>
+  </div>
+  <div class="dataType">
+    <%= f.label :dataType %><br />
+    <% types = ["string","integer","datetime","text","boolean","openList","entityDef","aChoice","selectOneInList"] %>
+    <%= f.select :dataType, types, {:selected => @attr_def.dataType}, html_options = {:onchange => 
+      "
+      jQuery('#childsEntityDef').hide();
+      jQuery('#childAttributs').hide();
+      if(this.value == 'openList' || this.value == 'selectOneInList')
+        jQuery('#childAttributs').show();
+      else if(this.value == 'entityDef')
+        jQuery('#childsEntityDef').show();
+      "} %>
+  </div>
+
+  <div id="childAttributs" class="input" style="display: none;">Child attributs choice: 
+    <ul class="inputs-list">
+    <% Databaseformalizer::AttrDef.all.each do |attrdef| %>
+      <li>
+        <label>
+          <%= check_box_tag "databaseformalizer_attr_def[attrDefChild_ids][]", attrdef.id,@attr_def.attrDefChilds.include?(attrdef) -%>
+          <span><%= attrdef.label %></span>
+        </label>
+      </li>
+    <% end %>
+  <li><%= link_to 'New Attrdef', new_databaseformalizer_attr_def_path %></li>
+  </div>
+  
+  <div id="childsEntityDef" style="display: none;">Entity def choice: 
+    <%= collection_select(:databaseformalizer_attr_def, :child_entity_def_name, Databaseformalizer::EntityDef.all, :id, :label)  %>
+  </div>
+    
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+  <script language="JavaScript">
+    if('<%=@attr_def.dataType%>' == 'openList' || '<%=@attr_def.dataType%>' == 'selectOneInList')
+      jQuery('#childAttributs').show();
+    else if('<%=@attr_def.dataType%>' == 'entityDef')
+      jQuery('#childsEntityDef').show();
+  </script>

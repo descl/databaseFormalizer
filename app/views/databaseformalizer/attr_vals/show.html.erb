@@ -1,0 +1,20 @@
+<div id="modelPicture"></div>
+
+<p>
+  <b>Value:</b>
+  <%= @attr_val.value %>
+</p>
+
+<p>
+  <b>Entity:</b>
+  <%= @attr_val.entity %>
+</p>
+
+<p>
+  <b>Attr def name:</b>
+  <%= @attr_val.attr_def_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_databaseformalizer_attr_val_path(@attr_val) %> |
+<%= link_to 'Back', databaseformalizer_attr_vals_path %>

@@ -1,0 +1,15 @@
+<%=
+suffix ||= ""
+if defined? value
+  f.text_field parent.id+suffix, :value => value
+elsif entity.attr_vals.find_by_attr_def_name(parent.id) != nil
+  f.text_field parent.id+suffix, :value => entity.attr_vals.find_by_attr_def_name(parent.id).value
+else
+  #f.text_field parent.id
+  f.text_field parent.id+suffix
+end
+%>
+
+<script>
+  jQuery('#attr_vals_<%= parent.id %>').datepicker();
+</script>

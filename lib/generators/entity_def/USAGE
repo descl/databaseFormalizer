@@ -1,0 +1,8 @@
+Description:
+    Generate the code like the usual scaffold for managing an entitydef directly in you application
+
+Example:
+    rails generate entity_def entitydefname
+
+    This will create:
+        the model, the helper, the views and the controller

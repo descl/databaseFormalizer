@@ -1,0 +1,10 @@
+<div id="modelPicture"></div>
+<h1>New <%= @type%></h1>
+
+<%= if params[:entity_def] != nil
+  render 'form', :action=>"update"
+else
+  render 'form', :action=>"new"
+end%>
+
+<%= link_to 'Back', databaseformalizer_entities_path %>

@@ -1,0 +1,51 @@
+<%= form_for(@entity_def, :html => { :class => "form-horizontal"}) do |f| %>
+  <% if @entity_def.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entity_def.errors.count, "error") %> prohibited this entity_def from being saved:</h2>
+
+      <ul>
+      <% @entity_def.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <legend><%= @entity_def.entity_def_name %></legend>
+    <% if type == "new" %>
+    	<div class="clearfix">
+      	<%= f.label :entity_def_name -%>
+      	<div class="input"><%= f.text_field :entity_def_name -%></div>
+    	</div>
+    <%end%>
+  	<div class="clearfix">
+    	<%= f.label :label %>
+  		<%= f.text_field :label %>
+		</div>
+  	<div class="clearfix">
+    	<%= f.label :description %>
+    	<div class="input"><%= f.text_field :description %></div>
+  	</div>
+  	<div class="clearfix">
+  	  <label>Choix des attributs: </label>
+    	<%= hidden_field_tag 'entity_def[attrDef_ids][]' %>
+      <div class="input">
+        <ul class="inputs-list">
+          <% Databaseformalizer::AttrDef.all.each do |attrdef| %>
+            <li>
+              <label>
+                <%= check_box_tag "databaseformalizer_entity_def[attrDef_ids][]", attrdef.id, @entity_def.attrDefs.include?(attrdef)  -%>
+                <span><%= attrdef.label %></span>
+              </label>
+            </li>
+          <% end %>
+          <li><%= link_to 'New Attrdef', new_databaseformalizer_attr_def_path %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit nil, :class=>"btn-primary" %>
+    </div>
+  </fieldset>
+<% end %>

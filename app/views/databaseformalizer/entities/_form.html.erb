@@ -1,0 +1,54 @@
+<script>
+$(document).ready(function(){
+    $(".new_databaseformalizer_entity").validate();
+    $(".edit_databaseformalizer_entity").validate();
+  });
+</script>
+<%= form_for(@entity, :html => { :class => "form-horizontal"}) do |f| %>
+  <% if @entity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entity.errors.count, "error") %> prohibited this entity from being saved:</h2>
+
+      <ul>
+      <% @entity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="control-group">
+    <label class="control-label" for="label"><%= f.label :label %></label>
+    <div class="controls">
+      <%= f.text_field :label %>
+    </div>
+    <label class="control-label" for="description"><%= f.label :description %></label>
+    <div class="controls">
+      <%= f.text_field :description %>
+    </div>
+  </div>
+
+  
+
+  
+    <% if action =="new" %> 
+      <div class="field">
+        <%= f.label :entity_def %><br />
+        <%= collection_select(:databaseformalizer_entity, :entity_def_id, @all_entityDefs, :id, :label)  %>
+      </div>
+    <% else %> 
+    
+      <%= if params[:entity_def] != nil; f.hidden_field(:entity_def_id, :value => @entity.entity_def.id); end%>
+    <div class="field">
+      <fieldset>
+  	    <legend>Attributs for <%= @entity.entity_def.label.pluralize %></legend>
+  	    <%= fields_for :attr_vals,  @attr_vals, :remote => true do |builder| %>
+  	      <%= render("attr_val_form_all", :parent => @entity.entity_def, :f => builder, :entity => @entity ) %>
+  	    <%end-%>
+      </fieldset>
+    </div>
+  <%end%>
+  <div class="form-actions">
+    <%= f.submit nil, :class=>"btn btn-primary" %>
+    <input type="reset" value="Reset">
+  </div>
+<% end %>

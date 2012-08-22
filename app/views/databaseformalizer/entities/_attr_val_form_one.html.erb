@@ -1,0 +1,6 @@
+<div class="control-group">
+  <label class="control-label" for="input01"><%= attrDef.label %></label>
+  <div class="controls">
+    <%= render("databaseformalizer/entities/attr_val_" + attrDef.dataType + "_form", :parent => attrDef, :f => f, :entity => entity) %>
+  </div>
+</div>

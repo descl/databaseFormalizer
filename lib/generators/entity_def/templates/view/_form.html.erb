@@ -1,0 +1,35 @@
+<%%= form_for(@<%= singular_name %>, :html => { :class => "form-horizontal"}) do |f| %>
+  <%% if @<%= singular_name %>.errors.any? %>
+    <div id="error_explanation">
+      <h2><%%= pluralize(@<%= singular_name %>.errors.count, "error") %> prohibited this <%= singular_name %> from being saved:</h2>
+
+      <ul>
+      <%% @<%= singular_name %>.errors.full_messages.each do |msg| %>
+        <li><%%= msg %></li>
+      <%% end %>
+      </ul>
+    </div>
+  <%% end %>
+  <div class="control-group">
+    <label class="control-label" for="label"><%%= f.label :label %></label>
+    <div class="controls">
+      <%%= f.text_field :label %>
+    </div>
+    <label class="control-label" for="description"><%%= f.label :description %></label>
+    <div class="controls">
+      <%%= f.text_field :description %>
+    </div>
+  </div>
+  <fieldset>
+    <legend>Description</legend>
+    <%%= fields_for :attr_vals,  @attr_vals, :remote => true do |builder| %>
+      <%% @attrs.each do |attrDef|  %>
+        <%%= render("databaseformalizer/entities/attr_val_form_one", :parent => @<%= singular_name %>.entity_def, :f => builder, :attrDef => attrDef, :entity => @<%= singular_name %>  ) %>
+      <%%end%>
+    <%%end%>
+  </fieldset>
+  <div class="form-actions">
+    <%%= f.submit nil, :class=>"btn btn-primary" %>
+    <input type="reset" value="Reset">
+  </div>
+<%% end %>

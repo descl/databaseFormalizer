@@ -1,0 +1,27 @@
+<h1>Listing <%= plural_name %></h1>
+
+<table class="table table-striped table-bordered table-condensed table-sorter table-fixed-header">
+  <thead class="header">
+    <tr>
+      <th>label</th>
+      <th></th>
+    </tr>
+  </thead>
+
+<%% @<%= plural_name %>.each do |<%= singular_name %>| %>
+  <tr>
+    <td><%%= <%= singular_name %>.label %></td>
+    <td class="td-button-menu">
+      <div class="btn-group">
+        <%%= link_to 'Show', <%= singular_name %>, :class => 'btn btn-info btn-mini' %>
+        <%%= link_to 'Edit', edit_databaseformalizer_entity_path(<%= singular_name %>), :class => 'btn btn-warning btn-mini' %>
+      </div>
+      <%%= button_to "Destroy", <%= singular_name %>, :method=>:delete, :class=>'btn btn-danger btn-mini' %>
+    </td>
+  </tr>
+<%% end %>
+</table>
+
+<br />
+
+<%%= link_to "new <%= singular_name %>", new_<%= singular_name %>_path, :class => 'btn btn-primary' %>

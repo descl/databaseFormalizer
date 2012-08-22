@@ -1,0 +1,14 @@
+
+<%=
+suffix ||= ""
+if defined? value
+  f.collection_select(parent.id+suffix, Databaseformalizer::Entity.find_all_by_entity_def_id(parent.child_entity_def_name), :id, :label, {:selected => value})
+elsif entity.attr_vals.find_by_attr_def_name(parent.id) != nil
+  f.collection_select(parent.id+suffix, Databaseformalizer::Entity.find_all_by_entity_def_id(parent.child_entity_def_name), :id, :label, {:selected => entity.attr_vals.find_by_attr_def_name(parent.id).value})
+else
+  f.collection_select(parent.id+suffix, Databaseformalizer::Entity.find_all_by_entity_def_id(parent.child_entity_def_name), :id, :label, {:include_blank => 'Not defined'})
+end
+%>
+<span id="new_<%= parent.id %>">
+  <%= link_to "new", new_databaseformalizer_entity_path(:attrID => parent.id, :entity_def => parent.child_entity_def_name),  :remote => 'true' %>
+</span>

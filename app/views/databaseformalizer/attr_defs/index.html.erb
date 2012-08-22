@@ -1,0 +1,38 @@
+<div id="metaModelPicture"></div>
+
+<% content_for :title, "All AttrDefs" %>
+<h1>Listing attr_defs</h1>
+
+<table class="table table-striped table-bordered table-condensed table-sorter">
+  <tr>
+    <th>Name</th>
+    <th>Label</th>
+    <th>Description</th>
+    <th>Mandatory</th>
+    <th>Category</th>
+    <th>Datatype</th>
+    <th></th>
+  </tr>
+
+<% @attr_defs.each do |attr_def| %>
+  <tr>
+    <td><%= attr_def.attr_def_name %></td>
+    <td><%= attr_def.label %></td>
+    <td><%= attr_def.description %></td>
+    <td><%= attr_def.mandatory %></td>
+    <td><%= attr_def.category %></td>
+    <td><%= attr_def.dataType %></td>
+    <td class="td-button-menu">
+      <div class="btn-group">
+        <%= link_to 'Show', attr_def, :class => 'btn btn-info btn-mini' %>
+        <%= link_to 'Edit', edit_databaseformalizer_attr_def_path(attr_def), :class => 'btn btn-warning btn-mini' %>
+      </div>
+      <%= button_to 'Destroy', attr_def, :method=>:delete, :class=>'btn btn-danger btn-mini' %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Attr def', new_databaseformalizer_attr_def_path, :class => 'btn btn-primary' %>

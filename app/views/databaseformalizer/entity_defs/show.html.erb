@@ -1,0 +1,30 @@
+<div id="metaModelPicture"></div>
+
+<p>
+  <b>Name:</b>
+  <%= @entity_def.entity_def_name %>
+</p>
+
+<p>
+  <b>Label:</b>
+  <%= @entity_def.label %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @entity_def.description %>
+</p>
+<p>
+  <b>EntityDefAttributs:</b>
+  <ol><% @entity_def.attrDefs.each do |attrDef| %><li><%= link_to attrDef.label, attrDef %></li><%end%></ol>
+
+</p>
+
+<p>
+  <b>Linked entities:</b>
+  <ol><% @entity_def.entities.each do |entity| %><li><%= link_to entity.label, entity %></li><%end%></ol>
+
+</p>
+<%= link_to 'Edit', edit_databaseformalizer_entity_def_path(@entity_def) %> |
+<%= link_to 'Back', databaseformalizer_entity_defs_path %> |
+<%= link_to 'New', new_databaseformalizer_entity_def_path %>

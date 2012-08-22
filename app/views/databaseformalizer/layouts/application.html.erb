@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATABASEFORMALIZER</title>
+    
+    <%= javascript_include_tag(
+    "/javascripts/jquery.js",
+    "/javascripts/databaseformalizer.js",
+    "/bootstrap/js/bootstrap-transition.js",
+    "/bootstrap/js/bootstrap-alert.js",
+    "/bootstrap/js/bootstrap-modal.js",
+    "/bootstrap/js/bootstrap-dropdown.js",
+    "/bootstrap/js/bootstrap-tab.js",
+    "/bootstrap/js/bootstrap-toggle.js",
+    "/bootstrap/js/bootstrap-fixed-header.js",
+    "/bootstrap/js/bootstrap-collapse.js",
+    "/bootstrap/js/bootstrap-tooltip.js",
+    "/bootstrap/js/bootstrap-popover.js",
+    "/tablesorter/jquery.tablesorter.min.js",
+    "/tablesorter/jquery.tablesorter.js",
+    "/tablesorter/jquery.ui.datepicker.js",
+    "/jquery-ui/js/jquery-ui-1.8.21.custom.min.js",
+    "/jquery-validation/jquery.validate.min.js"
+    ) %>
+    <%= csrf_meta_tag %>
+    <%= stylesheet_link_tag(
+    "/bootstrap/css/cerulean/bootstrap.min.css",
+    "/bootstrap/css/bootstrap-responsive.css",
+    "/tablesorter/style.css",
+    "/bootstrap/css/bootstrap-toggle.css",
+    "/bootstrap/css/bootstrap-fixed-header.css",
+    "/jquery-ui/css/ui-lightness/jquery-ui-1.8.21.custom.css",
+    "/stylesheets/databaseformalizer.css") %>
+    <!--"/bootstrap/css/bootstrap.min.css","/bootstrap/css/amadeus.css",-->
+  </head>
+  <script language="javascript" type="text/javascript" >
+      $(document).ready(function(){
+        $('.table-fixed-header').fixedHeader();
+      });
+  </script>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+       <a class="brand" href="/databaseformalizer">Database Formalizer</a>
+          <div class="nav-collapse" id="main-menu"></div>
+
+
+          <ul class="nav pull-right">
+            
+            <%= render :partial => "elise/account/header_menu" %>
+            
+            <% if current_user.can_see("databaseformalizer")%>
+              <li class="dropdown">
+                <div class="btn-group">
+                  <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                    <i class="icon-wrench"></i>Administration
+                    <span class="caret"></span>
+                  </a>
+                  
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Users", users_path %></li>
+                    <li><%= link_to "Access rights", elise_features_path %></li>
+                    <li><%= link_to "Roles", roles_path %></li>
+                    <li class="divider"></li>
+                    <p class="nav-header">Databaseformalizer</p>
+                    <li><%= link_to "entity def", databaseformalizer_entity_defs_path %></li>
+                    <li><%= link_to "attributs def", databaseformalizer_attr_defs_path %></li>
+                    <li><%= link_to "entities", databaseformalizer_entities_path %></li>
+                  </ul>
+                </div>
+              </li>
+            <%end%>
+          </ul>
+        </div>
+        <%= render :partial => "shared/navigation" %> 
+      </div>
+    </div>
+    
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="sidebar-nav-fixed">
+            <ul id="nav-list" class="nav nav-list">
+              <li><%= link_to "entity def", databaseformalizer_entity_defs_path %></li>
+              <li><%= link_to "attributs def", databaseformalizer_attr_defs_path %></li>
+              <li><%= link_to "entities", databaseformalizer_entities_path %></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span10">
+          <div class="container">
+            <div class="row">
+              <div class="span10">
+                <!-- Flash Display -->
+                <% if !flash[:error].nil? %>
+                  <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <b>Error:</b> <span id="flash_notice"><%= flash[:error] %></span>
+                  </div>
+                <% end %>
+                <% if !flash[:notice].nil? %>
+                  <div class="alert alert-success">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <b>Information:</b> <span id="flash_notice"><%= flash[:notice] %></span>
+                  </div>
+                <% end %>
+                <% if !flash[:warning].nil? %>
+                  <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <b>Warning:</b><span id="flash_notice"> <%= flash[:warning] %></span>
+                  </div>
+                <% end %>
+                <div class="visual-border">
+                  <%= content_for?(:content) ? yield(:content) : yield %>
+                </div>
+              </div>
+              <div class="span2">
+                <!-- Empty because we don't want the border in all the page -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

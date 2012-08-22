@@ -1,0 +1,64 @@
+.databaseformalizer {
+  color: red;
+}
+.td-button-menu {
+  width: 82px;
+  min-width: 82px;
+}
+.td-button-menu > .btn-group > .btn-info,.btn-warning {
+  width: 27px;
+}
+.td-button-menu > .btn-group {
+  height: 14px;
+}
+.td-button-menu > .button_to > div > .btn-danger {
+  width: 81px;
+  margin-bottom: 0px;
+}
+.td-button-menu > .button_to {
+  margin-bottom: 0px;
+}
+.navbar .nav > li > a {
+  padding: 4px;
+}
+
+body {
+  padding-top:  120px;
+}
+.red_border {
+  border: 2px solid red;
+  margin: 5px;
+  padding: 5px;
+}
+
+.sidebar-nav-fixed {
+    padding: 9px 0;
+    padding-top:140px;
+    padding-left: 20px;
+    position:fixed;
+    left:0px;
+    margin-top:0px;
+    top:0px;
+    /*top:120px;*/
+    width:140px;
+    background:#FFFFFF;
+}
+
+#modelPicture {
+  background-image:url(../images/model.png);
+  height:145px;
+  width:145px;
+  right:0px;
+  top:70px;
+  position: fixed;
+  z-index: 100;
+}
+#metaModelPicture {
+  background-image:url(../images/metamodel.png);
+  height:145px;
+  width:145px;
+  right:0px;
+  top:70px;
+  position: fixed;
+  z-index: 10;
+}

@@ -1,0 +1,12 @@
+<div class="openListFields">
+<% parent.attrDefChilds.each do |child| %>
+  <%= f.fields_for parent.attr_def_name do |builder|%>
+    <% id=0; entity.attr_vals.find_all_by_attr_def_name(child.attr_def_name).each do |attrValDefined| %>
+      <%=  render("attr_val_openList_element_form", :f => builder, :attrVal => attrValDefined, :id => id, :parent => child) %>
+      <% id=id+1 %>
+    <%end%>
+    <p><%= link_to_add_attrlistvalue "Add a #{child.id}(#{child.dataType})" ,builder,  child %></p>
+  <%end-%>
+<%end%>
+
+</div>
