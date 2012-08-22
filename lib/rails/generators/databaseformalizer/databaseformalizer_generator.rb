@@ -34,7 +34,7 @@ class DatabaseformalizerGenerator < Rails::Generators::Base
     tmp.write migration
     tmp.close
 
-    migration_template  'tmp/~migration_ready.rb',
+    migration_template  '../../../tmp/~migration_ready.rb',
                         'db/migrate/create_databaseformalizer_tables.rb'
     remove_file 'tmp/~migration_ready.rb'
   end
