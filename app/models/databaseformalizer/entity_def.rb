@@ -6,6 +6,7 @@ module Databaseformalizer
     
     has_many  :attrDefs, :through => :entityDefAttrDefs
     has_many  :entityDefAttrDefs, :foreign_key => "entity_def_name", :dependent => :delete_all
+    #dele_all just for the liaison table
     
     has_many  :entities, :dependent => :delete_all
     #has_many  :childAttrDefs, :foreign_key => "child_entity_def_name"

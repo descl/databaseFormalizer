@@ -29,7 +29,6 @@
   	</div>
   	<div class="clearfix">
   	  <label>Choix des attributs: </label>
-    	<%= hidden_field_tag 'entity_def[attrDef_ids][]' %>
       <div class="input">
         <ul class="inputs-list">
           <% Databaseformalizer::AttrDef.all.each do |attrdef| %>
