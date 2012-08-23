@@ -20,23 +20,8 @@ class DatabaseformalizerGenerator < Rails::Generators::Base
   # Every method that is declared below will be automatically executed when the generator is run
   
   def create_migration_file
-    f = File.open File.join(File.dirname(__FILE__), 'templates', 'schema.rb')
-    schema = f.read; f.close
-    
-    schema.gsub!(/ActiveRecord::Schema.*\n/, '')
-    schema.gsub!(/^end\n*$/, '')
-
-    f = File.open File.join(File.dirname(__FILE__), 'templates', 'migration.rb')
-    migration = f.read; f.close
-    migration.gsub!(/SCHEMA_AUTO_INSERTED_HERE/, schema)
-    
-    tmp = File.open "tmp/~migration_ready.rb", "w"
-    tmp.write migration
-    tmp.close
-
-    migration_template  '../../../tmp/~migration_ready.rb',
+    migration_template  'migration.rb',
                         'db/migrate/create_databaseformalizer_tables.rb'
-    remove_file 'tmp/~migration_ready.rb'
   end
 
   def copy_initializer_file
