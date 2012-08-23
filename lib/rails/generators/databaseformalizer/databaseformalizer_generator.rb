@@ -31,7 +31,12 @@ class DatabaseformalizerGenerator < Rails::Generators::Base
   def add_databaseformalizer_routes
     dbfo_route = "Databaseformalizer.extraRoutes(map)"
     route dbfo_route
-  end
-
   
+    sentinel = 'Application.routes.draw do
+'
+    gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
+      "Application.routes.draw do |map|
+"
+    end
+  end
 end
