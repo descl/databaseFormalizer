@@ -54,30 +54,21 @@
 
 
           <ul class="nav pull-right">
-            
-            <%= render :partial => "elise/account/header_menu" %>
-            
-            <% if current_user.can_see("databaseformalizer")%>
-              <li class="dropdown">
-                <div class="btn-group">
-                  <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
-                    <i class="icon-wrench"></i>Administration
-                    <span class="caret"></span>
-                  </a>
-                  
-                  <ul class="dropdown-menu">
-                    <li><%= link_to "Users", users_path %></li>
-                    <li><%= link_to "Access rights", elise_features_path %></li>
-                    <li><%= link_to "Roles", roles_path %></li>
-                    <li class="divider"></li>
-                    <p class="nav-header">Databaseformalizer</p>
-                    <li><%= link_to "entity def", databaseformalizer_entity_defs_path %></li>
-                    <li><%= link_to "attributs def", databaseformalizer_attr_defs_path %></li>
-                    <li><%= link_to "entities", databaseformalizer_entities_path %></li>
-                  </ul>
-                </div>
-              </li>
-            <%end%>
+            <li class="dropdown">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                  <i class="icon-wrench"></i>Administration
+                  <span class="caret"></span>
+                </a>
+                
+                <ul class="dropdown-menu">
+                  <p class="nav-header">Databaseformalizer</p>
+                  <li><%= link_to "entity def", databaseformalizer_entity_defs_path %></li>
+                  <li><%= link_to "attributs def", databaseformalizer_attr_defs_path %></li>
+                  <li><%= link_to "entities", databaseformalizer_entities_path %></li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
         <%= render :partial => "shared/navigation" %> 
