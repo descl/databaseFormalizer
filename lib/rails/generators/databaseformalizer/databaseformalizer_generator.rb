@@ -28,10 +28,10 @@ class DatabaseformalizerGenerator < Rails::Generators::Base
     copy_file 'initializer.rb', 'config/initializers/databaseformalizer.rb'
   end
 
-  def update_application_template
-    f = File.open "app/views/layouts/application.html.erb"
-    layout = f.read; f.close
-
+  def add_databaseformalizer_routes
+    dbfo_route = "Databaseformalizer.extraRoutes(map)"
+    route dbfo_route
   end
+
   
 end
