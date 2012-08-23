@@ -34,9 +34,12 @@ class DatabaseformalizerGenerator < Rails::Generators::Base
   
     sentinel = 'Application.routes.draw do
 '
-    gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
-      "Application.routes.draw do |map|
+    begin
+      gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
+        "Application.routes.draw do |map|
 "
+      end
+    rescue
     end
   end
 end
