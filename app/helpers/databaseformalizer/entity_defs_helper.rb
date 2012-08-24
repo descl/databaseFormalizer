@@ -5,7 +5,6 @@ module Databaseformalizer
       # Create a new graph
       g = GraphViz.new( :G, :type => :digraph )
       
-      # Graph configuration
       g.node[:color]    = "#ddaa66"
       g.node[:style]    = "filled"
       g.node[:shape]    = "box"
@@ -16,14 +15,11 @@ module Databaseformalizer
       g.node[:fontcolor]= "#000000"
       g.node[:margin]   = "0.05"
     
-      # set global edge options
       g.edge[:color]    = "#999999"
       g.edge[:weight]   = "1"
       g.edge[:fontsize] = "6"
       g.edge[:fontcolor]= "#444444"
       g.edge[:fontname] = "Verdana"
-      #g.edge[:dir]      = "forward"
-      #g.edge[:arrowsize]= "0"
         
       nodesMap = {}
       @links = Array.new
@@ -36,15 +32,24 @@ module Databaseformalizer
             attrDef.attrDefChilds.each do |child|
               childs += '+ '+child.label+' : '+child.childEntityDef.entity_def_name+' \n'
               link = [child.childEntityDef.entity_def_name, attrDef.label+'_enum']
-              if !@links.include? link
+              link2 = [attrDef.label+'_enum',child.childEntityDef.entity_def_name]
+              if ( (@links.include?(link) == false) and (@links.include?(link2) == false) )
                 @links.push(link)
               end
             end
             enum = g.add_nodes( attrDef.label+'_enum', "shape" => "record", "label" => '{enumeration('+attrDef.label+')|'+childs+'}' )
-            g.add_edges(enum,entityDef.entity_def_name, "arrowhead" => "vee" )
+            link =  [attrDef.label+'_enum',entityDef.entity_def_name]
+            link2 = [entityDef.entity_def_name,attrDef.label+'_enum']
+            if ( (@links.include?(link) == false) and (@links.include?(link2) == false) )# and @links.include? link )#(!@links.include? link && !@links.include? link2)
+              @links.push(link)
+            end
           elsif attrDef.dataType == "entityDef"
             if attrDef.childEntityDef != nil
-              @links.push([attrDef.childEntityDef.entity_def_name,entityDef.entity_def_name])
+              link =  [attrDef.childEntityDef.entity_def_name,entityDef.entity_def_name]
+              link2 = [entityDef.entity_def_name,attrDef.childEntityDef.entity_def_name]
+              if ( (@links.include?(link) == false) and (@links.include?(link2) == false) )
+                @links.push([attrDef.childEntityDef.entity_def_name,entityDef.entity_def_name])
+              end
               attrs += '+ '+attrDef.label+' : '+attrDef.childEntityDef.label+'\l'
             else
               attrs += '+ '+attrDef.label+' : null\l'
@@ -57,9 +62,8 @@ module Databaseformalizer
       end
       
       @links.each do |link|
-        edge = g.add_edges( link[0], link[1], "arrowhead" => "vee" )
-  
-        
+        edge = g.add_edges( link[0], link[1], "arrowhead" => "none" )
+
       end
       # Generate output image
       g.output( :png => uri )
