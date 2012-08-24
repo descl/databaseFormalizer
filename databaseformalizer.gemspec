@@ -11,7 +11,8 @@ Gem::Specification.new do |s|
   s.authors = ["Christophe Desclaux"]
   s.date = %q{2012-05-01}
   s.email = %q{descl@zouig.org}
-
+  s.homepage = "https://github.com/descl/databaseformalizer"
+  
   s.files = `git ls-files`.split("\n")
   s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
