@@ -5,11 +5,11 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
 Gem::Specification.new do |s|
   s.name = %q{databaseformalizer}
-  s.version = "0.3.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christophe Desclaux"]
-  s.date = %q{2012-05-01}
+  s.date = %q{2012-08-24}
   s.email = %q{descl@zouig.org}
   s.homepage = "https://github.com/descl/databaseformalizer"
   
