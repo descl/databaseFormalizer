@@ -54,7 +54,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
     )
     Databaseformalizer::EntityDef.find("<%= class_name %>").attrDefs.each do |attr|
       if params[:attr_vals][attr.label] != nil
-        @planned_event.update_attribute(attr.label, params[:attr_vals][attr.label])
+        @<%= singular_name %>.update_attribute(attr.label, params[:attr_vals][attr.label])
       end
     end
     respond_to do |format|
