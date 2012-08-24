@@ -2,7 +2,7 @@ module Databaseformalizer
   class AttrDef < ActiveRecord::Base
     set_table_name "databaseformalizer_attr_defs"
     set_primary_key :attr_def_name
-    attr_accessible :attr_def_name, :label, :description, :mandatory, :category, :dataType, :attrDefChild_ids
+    attr_accessible :attr_def_name, :label, :description, :mandatory, :category, :dataType, :attrDefChild_ids, :child_entity_def_name
     
     #Getting Entity
     has_many :entityDefs, :through => :entityDefAttrDefs

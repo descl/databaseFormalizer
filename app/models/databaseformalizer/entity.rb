@@ -1,7 +1,7 @@
 module Databaseformalizer
   class Entity < ActiveRecord::Base
     set_table_name "databaseformalizer_entities"
-    
+    attr_accessible :label, :description, :entity_def_id
     belongs_to :entity_def
   
     has_many  :attr_vals, :through => :attr_vals_entities

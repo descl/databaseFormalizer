@@ -1,6 +1,7 @@
 module Databaseformalizer
   class AttrVal < ActiveRecord::Base
     set_table_name "databaseformalizer_attr_vals"
+    attr_accessible :attrDef
     belongs_to :attrDef, :foreign_key => "attr_def_name", :class_name => "AttrDef"
     
     has_many :attrValsEntities, :class_name => "AttrValsEntity"#, :source => :attr_val
