@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.summary = %q{a gem for generating databases interaction controllers}
   
   s.add_dependency('ruby-graphviz', '~> 1.0.5')
-  s.add_dependency('jquery-rails', "~> 1.0.19")
+  s.add_dependency('jquery-rails')
   
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
