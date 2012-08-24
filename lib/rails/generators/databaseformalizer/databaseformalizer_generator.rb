@@ -29,17 +29,16 @@ class DatabaseformalizerGenerator < Rails::Generators::Base
   end
 
   def add_databaseformalizer_routes
-    dbfo_route = "Databaseformalizer.extraRoutes(map)"
+    dbfo_route = "mount_at =  '/databaseformalizer'
+    with_options(:path_prefix => mount_at, :name_prefix => 'databaseformalizer_') do |t|
+      t.resources :entities,    :controller => 'databaseformalizer/entities'
+      t.resources :entity_defs, :controller => 'databaseformalizer/entity_defs'
+      t.resources :attr_defs,   :controller => 'databaseformalizer/attr_defs'
+    end 
+       
+    match 'databaseformalizer',# :to => 'databaseformalizer/dbformahome#index'
+        :action => 'index', 
+        :controller => 'databaseformalizer/dbformahome'"
     route dbfo_route
-  
-    sentinel = 'Application.routes.draw do
-'
-    begin
-      gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
-        "Application.routes.draw do |map|
-"
-      end
-    rescue
-    end
   end
 end
