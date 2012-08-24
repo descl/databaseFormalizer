@@ -6,7 +6,7 @@ module Databaseformalizer
     # GET /entities.json
     def index
       @entities = Entity.find(:all, :limit=>100)
-      EntitiesHelper.setModelGraph("public/images/UMLmodel.png")
+      EntitiesHelper.setModelGraph("public/UMLmodel.png")
       
       respond_to do |format|
         format.html # index.html.erb

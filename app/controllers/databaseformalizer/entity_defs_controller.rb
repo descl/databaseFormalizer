@@ -4,7 +4,7 @@ module Databaseformalizer
     # GET /entity_defs.json
     def index
       @entity_defs = EntityDef.all
-      EntityDefsHelper.setMetaModelGraph("public/images/UMLmetaModel.png")
+      EntityDefsHelper.setMetaModelGraph("public/UMLmetaModel.png")
       
       respond_to do |format|
         format.html # index.html.erb
