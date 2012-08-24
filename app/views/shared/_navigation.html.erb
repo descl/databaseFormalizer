@@ -1,0 +1,22 @@
+<%
+@pageTitle = "All Requests" if @pageTitle.nil?
+@navigation_currentPageName = @pageTitle if @navigation_currentPageName.nil?
+@navigation_links = Hash.new if @navigation_links.nil?
+@navigation_additionalLinks = Hash.new if @navigation_additionalLinks.nil?
+
+#The best practice to manage this breadcrum is to define in a controller the method :createBreadcrumbsInfo
+#And set it as a before_filter  for all mathode which show a display
+#Please take exemple in release_controller.rb and application.rb
+
+%>
+<table class="breadcrumb" style="width: 100%;" cellpadding="5px">
+  <tr>
+    <td>
+       <%= link_to(raw("<i class='icon-home'></i>"), "/databaseformalizer"  )%> <span class="divider">/</span>
+      <%= link_to controller_name.capitalize, :controller=> controller_name %>
+      <span class="divider">/</span>
+      <%= action_name.capitalize %>
+    </td>
+  </tr>
+</table>
+
